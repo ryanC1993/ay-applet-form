@@ -6,14 +6,14 @@ const common = {
                 test: /\.(js|jsx|ts|tsx)$/,
                 exclude: /(node_modules|bower_components)/,
                 use: {
-                    loader: 'babel-loader'
+                    loader: 'babel-loader',
                 },
             },
-        ]
+        ],
     },
     resolve: {
-        extensions: ["*", "js", "jsx", ".ts", ".tsx"]
+        extensions: ['*', 'js', 'jsx', '.ts', '.tsx'],
     },
-};
+}
 
-module.exports = common;
+module.exports = common
