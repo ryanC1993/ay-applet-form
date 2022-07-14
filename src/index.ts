@@ -1,4 +1,2 @@
-function init() {
-    const message: string = 'Hello Ay'
-    console.log(message)
-}
+import '@master/css'
+import './index.css'
