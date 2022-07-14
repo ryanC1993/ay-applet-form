@@ -5,6 +5,7 @@
         "allowSyntheticDefaultImports": true,
         "allowJs": true,
         "target": "es6",
+        "jsx": "react",
         "noImplicitAny": false,
         "noUnusedLocals": true,
         "noUnusedParameters": true,
