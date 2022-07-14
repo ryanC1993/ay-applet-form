@@ -46,6 +46,7 @@
   "dependencies": {
     "@master/css": "^1.35.6",
     "@master/normal.css": "^1.9.5",
+    "classname": "^0.0.0",
     "react": "^17.0.0",
     "react-dom": "^17.0.0"
   }
