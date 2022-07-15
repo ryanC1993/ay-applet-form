@@ -9,8 +9,8 @@
   ],
   "scripts": {
     "build": "webpack --mode=production --config configs/webpack/webpack.config.js",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build:storybook": "build-storybook",
+    "dev": "start-storybook -p 6006"
   },
   "repository": "https://github.com/ryanC1993/ay-applet-form.git",
   "author": "ryanC <ryan149347@gmail.com>",
