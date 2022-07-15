@@ -12,6 +12,7 @@ export default {
                 component: 'Default custom number input.',
             },
         },
+        layout: 'centered',
     },
 } as ComponentMeta<typeof CustomInputNumber>
 
