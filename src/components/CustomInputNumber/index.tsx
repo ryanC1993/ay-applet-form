@@ -1,4 +1,10 @@
-import React, { useState, useRef, ChangeEvent, FocusEvent } from 'react'
+import React, {
+    useEffect,
+    useState,
+    useRef,
+    ChangeEvent,
+    FocusEvent,
+} from 'react'
 import clx from 'classname'
 // hooks
 import usePress from '../../hooks/usePress'
@@ -32,6 +38,11 @@ interface CustomInputNumberProps {
     // onPressEnter?: (e: KeyboardEvent<HTMLInputElement>) => void
 }
 
+interface InputEvent {
+    event: Event
+    value: string
+}
+
 const CustomInputNumber = ({
     min = 0,
     max = 30,
@@ -44,10 +55,15 @@ const CustomInputNumber = ({
     const defaultValue = useRef((value < min ? min : value).toString())
     const postiveStep = useRef(Math.abs(step))
     const inputRef = useRef<HTMLInputElement>(null)
+    const [inputEvent, setInputEvent] = useState<InputEvent>(null)
     const [inputValue, setInputValue] = useState<string>(defaultValue.current)
 
     const handleOnChange = (e) => {
-        onChange && onChange?.(e)
+        const nextValue = parseFloat(e?.target?.value)
+
+        if (nextValue >= min && nextValue <= max) {
+            onChange && onChange?.(e)
+        }
         setInputValue(e?.target?.value)
     }
     const handleOnBlur = (e) => {
@@ -78,23 +94,32 @@ const CustomInputNumber = ({
                 nextValue = min
             }
 
-            Object.getOwnPropertyDescriptor(
-                window?.HTMLInputElement?.prototype,
-                'value'
-            ).set.call(inputRef.current, nextValue.toString())
-            const onChangeEvent = new Event('input', { bubbles: true })
-            inputRef.current?.dispatchEvent(onChangeEvent)
+            const onChangeEvent = new Event('change', { bubbles: true })
+            setInputEvent({
+                event: onChangeEvent,
+                value: nextValue.toString(),
+            })
 
-            return nextValue.toString()
+            return prevInputValue
         })
     }
     const handlePress = (num: number) =>
         usePress({ callback: handlePlusMinus(num) })
 
+    useEffect(() => {
+        if (inputEvent) {
+            Object.getOwnPropertyDescriptor(
+                Object.getPrototypeOf(inputRef.current),
+                'value'
+            ).set.call(inputRef.current, inputEvent.value)
+            inputRef.current?.dispatchEvent(inputEvent.event)
+        }
+    }, [inputEvent])
+
     return (
         <div
             className={clx('flex', {
-                'opacity:0.5 pointer-events:none': disabled,
+                'opacity:0.4 pointer-events:none': disabled,
             })}
         >
             <button className={buttonClassName} {...handlePress(-1)}>
