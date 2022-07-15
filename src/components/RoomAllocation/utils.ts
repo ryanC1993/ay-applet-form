@@ -1,6 +1,6 @@
 import { PeopleInRoom } from './types'
 
-export const getCorrectRoomCount = (
+const getCorrectRoomCount = (
     guest: number,
     room: number,
     limitPerRoom: number
@@ -16,6 +16,21 @@ export const getCorrectRoomCount = (
 
         return room
     }
+}
+
+export const getSafeRoomAllocationProps = (
+    guest: number,
+    room: number,
+    limitPerRoom: number
+) => {
+    const getDefaultValue = (val) => (val < 1 ? 1 : val)
+    let _guest = getDefaultValue(guest)
+    let _room = getDefaultValue(room)
+    let _limitPerRoom = getDefaultValue(limitPerRoom)
+
+    const _correctRoomCount = getCorrectRoomCount(_guest, _room, _limitPerRoom)
+
+    return [_guest, _correctRoomCount, _limitPerRoom]
 }
 
 export const getUnAllocatedCount = (

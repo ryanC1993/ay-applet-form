@@ -16,7 +16,10 @@ export default {
 } as ComponentMeta<typeof RoomAllocation>
 
 const Template: ComponentStory<typeof RoomAllocation> = (args) => (
-    <RoomAllocation {...args} />
+    <RoomAllocation
+        key={`${args.guest}-${args.room}-${args.limitPerRoom || 4}`}
+        {...args}
+    />
 )
 
 export const Default = Template.bind({})
@@ -33,7 +36,7 @@ Example1.args = {
 Example1.parameters = {
     docs: {
         description: {
-            story: 'With guest 15, room 2, correct room number should be 4.',
+            story: 'With guest 15, room 2, correct room count should be 4.',
         },
     },
 }
@@ -46,7 +49,7 @@ Example2.args = {
 Example2.parameters = {
     docs: {
         description: {
-            story: 'With guest 5, room 11, correct room number should be 5.',
+            story: 'With room 11, guest 5 (room > guest), correct room count should be 5.',
         },
     },
 }
@@ -55,4 +58,11 @@ export const Disabled = Template.bind({})
 Disabled.args = {
     guest: 3,
     room: 3,
+}
+Disabled.parameters = {
+    docs: {
+        description: {
+            story: 'Disable input when guest count is equal room count.',
+        },
+    },
 }

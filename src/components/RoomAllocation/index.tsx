@@ -5,7 +5,7 @@ import Room from './Room'
 // types
 import { PeopleInRoom } from './types'
 // utils
-import { getCorrectRoomCount, getUnAllocatedCount } from './utils'
+import { getSafeRoomAllocationProps, getUnAllocatedCount } from './utils'
 
 interface RoomAllocationProps {
     /** Total guest value */
@@ -19,15 +19,13 @@ interface RoomAllocationProps {
 }
 
 const RoomAllocation = ({
-    limitPerRoom = 4,
-    ...restProps
+    guest,
+    room,
+    limitPerRoom: LIMIT_PER_EOOM = 4,
+    onChange,
 }: RoomAllocationProps) => {
-    const { guest: guestCount = 0, room: roomCount = 0 } = restProps
-    const correctRoomCount = getCorrectRoomCount(
-        guestCount,
-        roomCount,
-        limitPerRoom
-    )
+    const [guestCount, correctRoomCount, limitPerRoom] =
+        getSafeRoomAllocationProps(guest, room, LIMIT_PER_EOOM)
 
     const [roomAllocation, setRoomAllocation] = useState<PeopleInRoom[]>(
         Array(correctRoomCount).fill({ adult: 1, child: 0 })
@@ -45,15 +43,17 @@ const RoomAllocation = ({
                 getUnAllocatedCount(guestCount, nextRoomAllocation)
             )
 
-            return [...nextRoomAllocation]
+            onChange && onChange?.(nextRoomAllocation)
+            return nextRoomAllocation
         })
     }
 
     return (
         <div className="px:16px border:1px|solid|gray-88 r:4px min-w:360">
-            <h4 className="py:12px">
-                {`住客人數：${guestCount} 人 / ${correctRoomCount} 房`}
-            </h4>
+            <div className="py:12px flex justify-content:space-between align-items:flex-end">
+                <h4>{`住客人數：${guestCount} 人 / ${correctRoomCount} 房`}</h4>
+                <h6>{`每房上限：${limitPerRoom} 人`}</h6>
+            </div>
             <div
                 className={clx('my:12px py:16px px:8px r:4px font:14px', {
                     'border:1px|solid|sky-80 background:sky-92':
