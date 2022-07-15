@@ -53,7 +53,20 @@ MinValue.args = {
 MinValue.parameters = {
     docs: {
         description: {
-            story: 'Default value is 1, but min value is 2.',
+            story: 'Default value is 1, but min value is 2, use min value as default',
+        },
+    },
+}
+
+export const MaxValue = Template.bind({})
+MaxValue.args = {
+    max: 10,
+    value: 11,
+}
+MaxValue.parameters = {
+    docs: {
+        description: {
+            story: 'Default value is 11, but max value is 10, use max value as default.',
         },
     },
 }

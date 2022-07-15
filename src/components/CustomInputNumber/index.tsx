@@ -43,6 +43,23 @@ interface InputEvent {
     value: string
 }
 
+const getDefaultValue = ({
+    value,
+    min,
+    max,
+}: {
+    value: number
+    min: number
+    max: number
+}): number => {
+    if (value < min) {
+        return min
+    } else if (value > max) {
+        return max
+    }
+    return value
+}
+
 const CustomInputNumber = ({
     min = 0,
     max = 30,
@@ -52,7 +69,7 @@ const CustomInputNumber = ({
     ...restProps
 }: CustomInputNumberProps) => {
     const { onChange, onBlur } = restProps
-    const defaultValue = useRef((value < min ? min : value).toString())
+    const defaultValue = useRef(getDefaultValue({ value, min, max }).toString())
     const postiveStep = useRef(Math.abs(step))
     const inputRef = useRef<HTMLInputElement>(null)
     const [inputEvent, setInputEvent] = useState<InputEvent>(null)
