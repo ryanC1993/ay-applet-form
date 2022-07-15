@@ -69,8 +69,8 @@ const CustomInputNumber = ({
     ...restProps
 }: CustomInputNumberProps) => {
     const { onChange, onBlur } = restProps
+    const positiveStep = Math.abs(step)
     const defaultValue = useRef(getDefaultValue({ value, min, max }).toString())
-    const postiveStep = useRef(Math.abs(step))
     const inputRef = useRef<HTMLInputElement>(null)
     const [inputEvent, setInputEvent] = useState<InputEvent>(null)
     const [inputValue, setInputValue] = useState<string>(defaultValue.current)
@@ -102,7 +102,7 @@ const CustomInputNumber = ({
         if (disabled) return
 
         setInputValue((prevInputValue) => {
-            const nextStep = num * postiveStep.current
+            const nextStep = num * positiveStep
             let nextValue = parseFloat(prevInputValue) + nextStep
 
             if (nextValue > max) {
