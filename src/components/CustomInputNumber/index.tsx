@@ -88,13 +88,13 @@ const CustomInputNumber = ({
         if (!inputValue) {
             setInputValue(defaultValue.current)
         } else {
-            const curentValue = parseFloat(inputValue)
-            if (curentValue > max) {
+            const currentInputValue = parseFloat(inputValue)
+            if (currentInputValue > max) {
                 setInputValue(max.toString())
-            } else if (curentValue < min) {
+            } else if (currentInputValue < min) {
                 setInputValue(min.toString())
             } else {
-                setInputValue(curentValue.toString())
+                setInputValue(currentInputValue.toString())
             }
         }
     }
