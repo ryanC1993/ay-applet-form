@@ -10,6 +10,14 @@ const getBabelConfig = ({ modules = 'auto' } = {}) => {
             ],
             '@babel/preset-react',
         ],
+        plugins: [
+            [
+                '@babel/plugin-transform-runtime',
+                {
+                    useESModules: modules === false,
+                },
+            ],
+        ],
     }
 }
 
