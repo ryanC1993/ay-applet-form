@@ -1,3 +1,5 @@
+const commonWepackConfig = require('../configs/webpack/webpack.common')
+
 module.exports = {
     stories: [
         '../src/**/*.stories.mdx',
@@ -11,5 +13,11 @@ module.exports = {
     framework: '@storybook/react',
     core: {
         builder: 'webpack5',
+    },
+    webpackFinal: async (config) => {
+        return {
+            ...config,
+            ...commonWepackConfig,
+        }
     },
 }
