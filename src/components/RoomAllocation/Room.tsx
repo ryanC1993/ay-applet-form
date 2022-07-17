@@ -90,6 +90,7 @@ const Room = ({ disabled, limit, room, onRoomChange }: RoomProps) => {
                     value={room.adult}
                     min={1}
                     max={roomState.adultMax}
+                    key={roomState.adultMax}
                     onChange={handleInputChange(InputType.adult)}
                     disabled={disabled}
                 />
@@ -99,6 +100,7 @@ const Room = ({ disabled, limit, room, onRoomChange }: RoomProps) => {
                 <CustomInputNumber
                     value={room.child}
                     max={roomState.childMax}
+                    key={roomState.childMax}
                     onChange={handleInputChange(InputType.child)}
                     disabled={disabled}
                 />

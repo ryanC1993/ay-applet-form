@@ -1,9 +1,4 @@
-import { useEffect, useState, useRef } from 'react'
-
-enum ClickAction {
-    click,
-    press,
-}
+import { useEffect, useRef } from 'react'
 
 interface UsePressProps {
     callback?: () => void
@@ -11,8 +6,6 @@ interface UsePressProps {
 }
 
 const usePress = ({ callback, delay = 200 }: UsePressProps) => {
-    const [action, setAction] = useState<ClickAction>()
-
     const intervalRef = useRef(null)
     const isLongPress = useRef(false)
 
@@ -28,7 +21,6 @@ const usePress = ({ callback, delay = 200 }: UsePressProps) => {
         intervalRef.current = setInterval(() => {
             callback && callback?.()
             isLongPress.current = true
-            setAction(ClickAction.press)
         }, delay)
     }
 
@@ -37,7 +29,6 @@ const usePress = ({ callback, delay = 200 }: UsePressProps) => {
     }
 
     const handleOnTouchEnd = () => {
-        if (action === ClickAction.press) return
         stopTimer()
     }
 
@@ -54,7 +45,6 @@ const usePress = ({ callback, delay = 200 }: UsePressProps) => {
             return
         }
         callback && callback?.()
-        setAction(ClickAction.click)
     }
 
     useEffect(() => {

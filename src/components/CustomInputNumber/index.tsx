@@ -10,7 +10,7 @@ import clx from 'classname'
 import usePress from '../../hooks/usePress'
 
 const buttonClassName = `
-    text:center border:1px|solid|sky-66 font:sky-50 w:40px py:8px r:4px scale(0.95):active ~duration:200
+    user-select:none text:center border:1px|solid|sky-66 font:sky-50 w:40px py:8px r:4px scale(0.95):active ~duration:200
 `
 const inputClassName = `
     mx:8px w:60px r:4px border:1px|solid|gray-66 font:fade-20 px:12px text:center
