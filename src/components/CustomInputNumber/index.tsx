@@ -85,18 +85,23 @@ const CustomInputNumber = ({
     }
     const handleOnBlur = (e) => {
         onBlur && onBlur?.(e)
+
+        const blurValue = parseFloat(e?.target?.value)
+        let nextValue = blurValue.toString()
         if (!inputValue) {
-            setInputValue(defaultValue.current)
+            nextValue = defaultValue.current
         } else {
-            const currentInputValue = parseFloat(inputValue)
-            if (currentInputValue > max) {
-                setInputValue(max.toString())
-            } else if (currentInputValue < min) {
-                setInputValue(min.toString())
-            } else {
-                setInputValue(currentInputValue.toString())
+            if (blurValue > max) {
+                nextValue = max.toString()
+            } else if (blurValue < min) {
+                nextValue = min.toString()
             }
         }
+        const onChangeEvent = new Event('change', { bubbles: true })
+        setInputEvent({
+            event: onChangeEvent,
+            value: nextValue.toString(),
+        })
     }
     const handlePlusMinus = (num: number) => () => {
         if (disabled) return
