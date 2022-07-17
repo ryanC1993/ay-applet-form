@@ -11,6 +11,7 @@ const getWebpackConfig = require('./configs/webpack/webpack.config')
 const { series, parallel } = gulp
 
 function build({ dest, tsConfig = {}, babelOptions = {} }) {
+    /** TS */
     const tsProject = ts.createProject('tsconfig.json', tsConfig)
     const tsResult = tsProject.src().pipe(tsProject())
     merge2([
@@ -19,6 +20,8 @@ function build({ dest, tsConfig = {}, babelOptions = {} }) {
             .pipe(babel(getBabelConfig(babelOptions)))
             .pipe(gulp.dest(dest)),
     ])
+    /** CSS */
+    gulp.src(['src/**/*.css']).pipe(gulp.dest(dest))
 }
 
 function buildLib(cb) {
