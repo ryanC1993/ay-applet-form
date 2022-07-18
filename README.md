@@ -2,10 +2,9 @@
 > Componet Doc: https://ryanc1993.github.io/ay-applet-form
 
 
-Ay React form component library. Written in typescript. Using React.js. Developed with [Webpack](https://webpack.js.org/), [Babel](https://babeljs.io/) and [@Storybook](https://storybook.js.org/).
+Ay React form component library. Written in React.js with typescript. Developed with [Webpack](https://webpack.js.org/), [Babel](https://babeljs.io/) and [@Storybook](https://storybook.js.org/).
 
 ![](./screenshot/storybook.png)
-
 
 
 ## File Structure
@@ -13,9 +12,11 @@ The mainly structure is as below:
 ```
 ay-applet-form
 ├── package.json
+├── gulq.js                    (build task.)
 ├── .storybook/                (storybook config.)
-├── configs/
-│   ├── webpack/               (webpack config.)
+├── configs/                   (configs for webpack, babel.)
+│   ├── webpack/
+│   ├── getBabelConfig
 ├── src
 │   ├── components/
 │   │   ├── CustomInputNumber/
