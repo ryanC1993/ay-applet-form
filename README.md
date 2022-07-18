@@ -12,7 +12,7 @@ The mainly structure is as below:
 ```
 ay-applet-form
 ├── package.json
-├── gulq.js                    (build task.)
+├── gulpfile.js                (build task.)
 ├── .storybook/                (storybook config.)
 ├── configs/                   (configs for webpack, babel.)
 │   ├── webpack/
